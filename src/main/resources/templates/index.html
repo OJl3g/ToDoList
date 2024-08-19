@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список дел</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/add">Добавить дело</a></li>
+    </ul>
+</nav>
+
+<div class="content">
+    <h1>Список дел</h1>
+
+    <div class="task-list">
+        <h2>Описание дел</h2>
+        <p th:text="${description}">Здесь будет отображено описание дела</p>
+    </div>
+
+    <div class="task-list">
+        <h2>Важные дела</h2>
+        <ul>
+            <li th:each="todo : ${todoLists}" th:if="${todo.importantThings != null}">
+                <span th:text="${todo.importantThings}">Важное дело</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="task-list">
+        <h2>Простые дела</h2>
+        <ul>
+            <li th:each="todo : ${todoLists}" th:if="${todo.simpleThings != null}">
+                <span th:text="${todo.simpleThings}">Простое дело</span>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
