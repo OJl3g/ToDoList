@@ -1,4 +1,4 @@
-package org.ojl3g.todolist;
+package org.ojl3g;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

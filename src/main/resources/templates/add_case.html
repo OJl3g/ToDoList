@@ -92,16 +92,17 @@
 <body>
 <div class="container">
     <h1>Добавить новое дело</h1>
-    <form>
+    <form action="/add_case" method="post">
         <label for="taskType">Выберите тип дела</label>
-        <select id="taskType">
+
+        <select id="taskType" name="type">
             <option value="urgent">Срочное дело</option>
             <option value="important">Важное дело</option>
             <option value="simple">Простое дело</option>
         </select>
 
         <label for="description">Описание дела</label>
-        <input type="text" id="description" name="description">
+        <textarea type="text" id="description" name="description"></textarea>
 
         <button type="submit">Добавить</button>
     </form>

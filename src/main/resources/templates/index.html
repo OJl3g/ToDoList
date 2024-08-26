@@ -10,7 +10,7 @@
 <nav>
     <ul>
         <li><a href="/">Главная</a></li>
-        <li><a href="/add">Добавить дело</a></li>
+        <li><a methods="get" th:href="@{/add_case}">Добавить дело</a></li>
     </ul>
 </nav>
 
@@ -18,15 +18,10 @@
     <h1>Список дел</h1>
 
     <div class="task-list">
-        <h2>Описание дел</h2>
-        <p th:text="${description}">Здесь будет отображено описание дела</p>
-    </div>
-
-    <div class="task-list">
         <h2>Важные дела</h2>
         <ul>
-            <li th:each="todo : ${todoLists}" th:if="${todo.importantThings != null}">
-                <span th:text="${todo.importantThings}">Важное дело</span>
+            <li th:each="todo : ${listMatter}">
+                <span th:text="${todo.name}">Важное дело</span>
             </li>
         </ul>
     </div>
@@ -34,8 +29,17 @@
     <div class="task-list">
         <h2>Простые дела</h2>
         <ul>
-            <li th:each="todo : ${todoLists}" th:if="${todo.simpleThings != null}">
-                <span th:text="${todo.simpleThings}">Простое дело</span>
+            <li th:each="todo : ${listSimple}">
+                <span th:text="${todo.name}">Простое дело</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="task-list">
+        <h2>Срочные дела</h2>
+        <ul>
+            <li th:each="todo : ${listUrgent}">
+                <span th:text="${todo.name}">Срочное дело</span>
             </li>
         </ul>
     </div>

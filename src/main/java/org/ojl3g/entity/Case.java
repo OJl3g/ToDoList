@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "task")
 //сущность, для того, что бы от нее наследовались и использовалась одна таблица
 // для всех классов наследников.
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -27,8 +28,4 @@ public abstract class Case {
     public Case(String description) {
         this.description = description;
     }
-
-
-
-
 }
