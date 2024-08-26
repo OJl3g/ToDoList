@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>История изменений задачи</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="/">Главная</a></li>
+    </ul>
+</nav>
+
+<div class="content">
+    <h1>История изменений задачи</h1>
+    <ul>
+        <li th:each="audit : ${auditLogs}">
+            <span th:text="${audit.timestamp}">Дата и время</span> -
+            <span th:text="${audit.action}">Действие</span>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

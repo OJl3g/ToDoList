@@ -28,18 +28,23 @@ src/
 │   │       │   ├── Case.java              # Abstract base class for tasks
 │   │       │   ├── ImportantMatter.java   # Entity for important tasks
 │   │       │   ├── SimpleMatter.java      # Entity for simple tasks
-│   │       │   └── UrgentMatter.java      # Entity for urgent tasks
+│   │       │   ├── UrgentMatter.java      # Entity for urgent tasks
+│   │       │   └── Audit.java             # Entity for task audit logs
 │   │       ├── repository/
-│   │       │   └── CaseRepository.java    # JPA repository interface for task entities
+│   │       │   ├── CaseRepository.java    # JPA repository interface for task entities
+│   │       │   └── AuditRepository.java   # JPA repository interface for audit entities
 │   │       └── service/
 │   │           └── CaseService.java       # Service layer for business logic
 │   ├── resources/
 │   │   ├── application.properties         # Application configuration file
 │   │   ├── templates/
 │   │   │   ├── index.html                 # Thymeleaf template for the main page
-│   │   │   └── add_case.html              # Thymeleaf template for adding a new task
+│   │   │   ├── add_case.html              # Thymeleaf template for adding a new task
+│   │   │   └── task_history.html          # Thymeleaf template for viewing task history
 │   │   └── static/
 │   │       └── css/
 │   │           └── styles.css             # CSS styles for the application
 └── test/
     └── java/                              # Unit and integration tests (not implemented in this example)
+
+

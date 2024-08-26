@@ -1,9 +1,7 @@
 package org.ojl3g.controller;
 
-import org.ojl3g.entity.Case;
-import org.ojl3g.entity.ImportantMatter;
-import org.ojl3g.entity.SimpleMatter;
-import org.ojl3g.entity.UrgentMatter;
+import org.ojl3g.entity.*;
+import org.ojl3g.repository.AuditRepository;
 import org.ojl3g.service.CaseService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +13,11 @@ import java.util.List;
 @org.springframework.stereotype.Controller
 public class CaseController {
     private final CaseService caseService;
+    private final AuditRepository auditRepository;
 
-    public CaseController(CaseService caseService) {
+    public CaseController(CaseService caseService, AuditRepository auditRepository) {
         this.caseService = caseService;
+        this.auditRepository = auditRepository;
     }
 
     @GetMapping("/")
@@ -28,6 +28,11 @@ public class CaseController {
         List<Case> listSimple = doList.stream().filter(task -> task instanceof SimpleMatter).toList();
         List<Case> listMatter = doList.stream().filter(task -> task instanceof ImportantMatter).toList();
         List<Case> listUrgent = doList.stream().filter(task -> task instanceof UrgentMatter).toList();
+
+        //Эти строки добавляют данные в модель Model, которая используется для передачи данных из контроллера в представление (HTML-шаблон).
+        model.addAttribute("listSimple", listSimple);
+        model.addAttribute("listMatter", listMatter);
+        model.addAttribute("listUrgent", listUrgent);
 
         return "index";
     }
@@ -51,7 +56,19 @@ public class CaseController {
         }
         caseService.saveToDoList(caseObject);
 
+        // Логирование создания задачи
+        auditRepository.save(new Audit(caseObject.getId(), "Создание задачи"));
+
         return "redirect:/";
 
+    }
+
+    @GetMapping("/task_history")
+    public String taskHistory(@RequestParam Long id,
+                              @RequestParam Model model) {
+
+        List<Audit> auditLogs = auditRepository.findByTaskId(id);
+        model.addAttribute("auditLogs", auditLogs);
+        return "task_history";
     }
 }
